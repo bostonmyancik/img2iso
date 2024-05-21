@@ -1,19 +1,10 @@
 import pycdlib
 import tkinter as tk
 from tkinter import filedialog, messagebox
-import io
-
+import shutil
 
 def convert_img_to_iso(img_path, iso_path):
-    iso = pycdlib.PyCdlib()
-    iso.new(udf='2.60')  # Creating a new ISO with UDF 2.60 format
-
-    with open(img_path, 'rb') as img_file:
-        data = img_file.read()
-        iso.add_fp(io.BytesIO(data), len(data), '/IMG_FILE.IMG;1')
-
-    iso.write(iso_path)
-    iso.close()
+    shutil.copyfile(img_path, iso_path)
 
 def select_img_file():
     img_path = filedialog.askopenfilename(
